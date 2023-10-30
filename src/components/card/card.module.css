@@ -1,0 +1,13 @@
+.card {
+    background-color: rgb(222, 222, 222);
+    padding: 10px;
+    border-radius: 20px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.text {
+    color: rgb(116, 116, 116);
+}

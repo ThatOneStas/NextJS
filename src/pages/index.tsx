@@ -1,8 +1,18 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
+// components
+import Card from '@/components/card'
 
 
 export default function Home() {
+  const data = [
+    {title: "Test 1",
+    description: "Lorem 1"},
+    {title: "Test 2",
+    description: "Lorem 2"},
+    {title: "Test 3",
+    description: "Lorem 3"}]
   return (
     <>
       <Head>
@@ -13,6 +23,18 @@ export default function Home() {
       </Head>
       <main>
         Hello world!
+        <nav>
+          <ul>
+            <li><Link href="/about">About</Link></li>
+            <li><Link href="/news">News</Link></li>
+            <li></li>
+          </ul>
+        </nav>
+        {
+          data.map((e:any)=>{
+            return <Card data={e} key={e} />
+          })
+        }
       </main>
     </>
   )
