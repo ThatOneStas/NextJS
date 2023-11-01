@@ -1,18 +1,52 @@
+import { useState, useEffect, useMemo, use } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
 // components
 import Card from '@/components/card'
+// modules
+import {Server} from '@/modules/server'
 
+interface User{
+  name: string
+  mail: string
+  comment: string
+}
 
 export default function Home() {
   const data = [
-    {title: "Test 1",
+    {id:1, title: "Test 1",
     description: "Lorem 1"},
-    {title: "Test 2",
+    {id:2, title: "Test 2",
     description: "Lorem 2"},
-    {title: "Test 3",
-    description: "Lorem 3"}]
+    {id:3, title: "Test 3",
+    description: "Lorem 3"}
+  ]
+  // init
+  const server = new Server()
+  // states
+  const [number,setNumber] = useState<number>(0)
+  const [user,setUser] = useState<User>({
+    name: "",
+    mail:"",
+    comment:""
+  })
+
+  // on load
+  useEffect(()=>{
+    if(number==5){console.log("Yes")}
+  }, [number])
+
+  // calc
+  const adult = useMemo(()=>{
+    if(number>=18){
+      return "Allowed"
+    }
+    else {
+      return "Not allowed"
+    }
+  }, [number])
+
   return (
     <>
       <Head>
@@ -31,10 +65,66 @@ export default function Home() {
           </ul>
         </nav>
         {
-          data.map((e:any)=>{
-            return <Card data={e} key={e} />
-          })
+          // data.map((e:any)=>{
+          //   return <Card num={number} data={e} key={e.id} />
+          // })
         }
+        <div>
+          {number}
+        </div>
+        <div>
+          {adult}
+        </div>
+        <div>
+          {/* Plus 1 */}
+          <button onClick={()=>{
+            setNumber(number+1)
+          }}>+</button>
+          {/* Minus 1 */}
+          <button onClick={()=>{
+            setNumber(number-1)
+          }}>-</button>
+        </div>
+
+        {/* ------form----- */}
+        <form action="">
+        <input
+            value={user.name}
+            type="text"
+            placeholder="Enter your name: "
+            onChange={(e) => {
+              setUser({
+                ...user,
+                name: e.target.value,
+              });
+            }}
+          />
+          <input
+            value={user.mail}
+            type="mail"
+            placeholder="Enter your mail: "
+            onChange={(e) => {
+              setUser({
+                ...user,
+                mail: e.target.value,
+              });
+            }}
+          />
+          <textarea
+            value={user.comment}
+            placeholder="Enter text: "
+            onChange={(e) => {
+              setUser({
+                ...user,
+                comment: e.target.value,
+              });
+            }}
+          ></textarea>
+          <input onClick={(e)=>{
+            e.preventDefault()
+            server.post("endpoint", user)
+          }} type="submit" />
+        </form>
       </main>
     </>
   )
