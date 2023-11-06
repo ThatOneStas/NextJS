@@ -2,10 +2,18 @@ import { useState, useEffect, useMemo, use } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import styles from '@/styles/Home.module.css'
+import Image from 'next/image'
 // components
+  // - banner
+import Banner from '@/components/banner'
+  // - card
 import Card from '@/components/card'
 // modules
 import {Server} from '@/modules/server'
+// img
+import img from "@/assets/img/rick.png"
+
+
 
 interface User{
   name: string
@@ -46,6 +54,10 @@ export default function Home() {
       return "Not allowed"
     }
   }, [number])
+  // functions
+  const reverseProps = (data: string) => {
+    console.log(data,"-- True")
+  }
 
   return (
     <>
@@ -56,7 +68,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <Banner reverseProps={reverseProps} title="Test Props" description='Lorem Ipsun' />
         Hello world!
+
         <nav>
           <ul>
             <li><Link href="/about">About</Link></li>
@@ -125,6 +139,7 @@ export default function Home() {
             server.post("endpoint", user)
           }} type="submit" />
         </form>
+        <Image src={img} alt="test" width={400} height={200} quality={100}/>
       </main>
     </>
   )
