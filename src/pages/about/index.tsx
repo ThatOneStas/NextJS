@@ -5,7 +5,7 @@ import Card from '@/components/card'
 const index = () => {
   return <div>
       <Link href="/">Головна</Link>
-      <Card />
+      <Card title="Test Props" description='Lorem Ipsun'/>
     </div>
   
 }
