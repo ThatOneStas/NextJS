@@ -5,6 +5,8 @@ import s from './products.module.scss'
 import Cart from "@/components/cart"
 // interface
 import { Product } from '@/interfaces'
+// modules 
+import { Products } from '@/modules/server/products'
 
 
 const getAllProducts = async() => {
@@ -14,11 +16,13 @@ const getAllProducts = async() => {
 }
 
 const index = () => {
+        // init
+        const Products_data = new Products()
         // states
         const [products, setProducts] = useState<Product[] | []>()
         // load
         useEffect(()=>{
-            getAllProducts().then((data: Product[])=>{
+            Products_data.getData("posts").then((data: Product[])=>{
                 setProducts(data)
             })
         },[])

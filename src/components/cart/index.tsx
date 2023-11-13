@@ -18,7 +18,7 @@ const cart = ({data}: Props) => {
         <h2>{title}</h2>
         <p>{description}</p>
         <div>{price}</div>
-        <Link href={`/products/${id}`}>Detail</Link>
+        <Link href={`/products/${title}?id=${id}`}>Detail</Link>
     </>
   )
 }
