@@ -3,6 +3,11 @@ import React, {useEffect, useState} from 'react'
 import s from './cart.module.scss'
 // Link
 import Link from 'next/link'
+// redux
+import {useDispatch} from "react-redux"
+import { addItemToCart } from '@/store/features/cart'
+
+
 // interface
 import {Product} from "@/interfaces"
 interface Props{
@@ -11,14 +16,17 @@ interface Props{
 
 const cart = ({data}: Props) => {
     const {title,price,description,id} = data;
+    // initialization
+    const dispatch = useDispatch()
   return (
     <>
-        <div style={{padding:10, border:2,borderBlockColor:"#f00"}}>
+        <div className={s.card}>
+          <h2>{title}</h2>
+          <p>{description}</p>
+          <div>{price}</div>
+          <Link href={`/products/${title}?id=${id}`}>Detail</Link>
+          <div onClick={()=>{dispatch(addItemToCart(id))}} className={s.card__btn}>Add to cart</div>
         </div>
-        <h2>{title}</h2>
-        <p>{description}</p>
-        <div>{price}</div>
-        <Link href={`/products/${title}?id=${id}`}>Detail</Link>
     </>
   )
 }

@@ -1,0 +1,13 @@
+.card {
+    padding: 12px;
+    border: 1px solid red;
+    &__btn{
+        padding: 4px 6px;
+        color: white;
+        background-color: green;
+        display: inline;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-left: 8px;
+    }
+}
