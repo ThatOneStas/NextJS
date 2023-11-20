@@ -5,7 +5,7 @@ import s from './cart.module.scss'
 import Link from 'next/link'
 // redux
 import {useDispatch} from "react-redux"
-import { addItemToCart } from '@/store/features/cart'
+import { addItemToCart, removeFromCart } from '@/store/features/cart'
 
 
 // interface
@@ -26,6 +26,7 @@ const cart = ({data}: Props) => {
           <div>{price}</div>
           <Link href={`/products/${title}?id=${id}`}>Detail</Link>
           <div onClick={()=>{dispatch(addItemToCart(id))}} className={s.card__btn}>Add to cart</div>
+          <div onClick={()=>{dispatch(removeFromCart(id))}} className={s.card__del}>Del from cart</div>
         </div>
     </>
   )

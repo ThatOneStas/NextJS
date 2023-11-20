@@ -1,8 +1,7 @@
-import '@/styles/globals.css'
+import '@/styles/globals.scss'
 import type { AppProps } from 'next/app'
 import {useEffect} from "react"
 import {useDispatch} from "react-redux"
-import {addDataFromLS}
 // layout
 import Layouts from '@/layouts'
 // redux
