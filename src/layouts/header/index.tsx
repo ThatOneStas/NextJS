@@ -11,12 +11,13 @@ const header = () => {
   const dispatch = useDispatch()
   return (
     <header className={style.header}>
-      Header
       <nav>
         <li style={{padding:10}}><Link href={'/'}>Home</Link></li>
         <li style={{padding:10}}><Link href={'/news'}>News</Link></li>
         <li style={{padding:10}}><Link href={'/products'}>Products</Link></li>
         <li style={{padding:10}}><Link href={'/redux'}>Redux</Link></li>
+        <li style={{padding:10}}><Link href={'/wishlist'}>Wish List</Link></li>
+
       </nav>
       <p>{CART_ITEMS.length > 0 ? CART_ITEMS.length : "корзина пуста"}</p>
       <div onClick={()=>{dispatch(clearCart())}} className={style.header__clear}>Clear cart</div>

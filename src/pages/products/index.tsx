@@ -15,17 +15,15 @@ const getAllProducts = async() => {
             .then(json=>{return json;})
 }
 
-const index = () => {
+interface Props {
+    prods: Product[]
+}
+
+const index = ({prods}:Props) => {
         // init
         const Products_data = new Products()
         // states
-        const [products, setProducts] = useState<Product[] | []>()
-        // load
-        useEffect(()=>{
-            Products_data.getData("posts").then((data: Product[])=>{
-                setProducts(data)
-            })
-        },[])
+        const [products] = useState<Product[] | []>(prods)
   return (
     <>
         <div className={s.products}>
@@ -39,4 +37,12 @@ const index = () => {
   )
 }
 
-export default index
+// SSR
+export async function getServerSideProps() {
+    // Fetch data from external API
+    const Products_data = new Products()
+    const data = await Products_data.getData("posts")
+    // Pass data to the page via props
+    return { props: {prods: data } }
+}
+export default index;
