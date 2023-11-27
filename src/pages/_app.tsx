@@ -10,9 +10,7 @@ import { store } from '../store';
 
 export default function App({ Component, pageProps }: AppProps) {
   // on load
-  useEffect(()=>{
-    console.log("App loaded")
-  })
+  useEffect(()=>{})
   return (
     <Provider store={store}>
       <Layouts>

@@ -5,31 +5,33 @@ import s from "./Single.module.scss"
 // module
 import { Products } from '@/modules/server/products'
 
-const getAllProducts = async() => {
-    return await fetch('https://fakestoreapi.com/products')
-            .then(res=>res.json())
-            .then(json=>{return json;})
+interface Props{
+  data:{
+    user_id: number,
+    id: number,
+    title: string,
+    body: string
+  }
 }
 
-const SingleProduct = () => {
-    // init 
-    const Product = new Products()
+const SingleProduct = ({data}:Props) => {
     // states
-    const [product, setProduct] = useState<any>();
-    const router = useRouter()
-    const {slug,id} = router.query;
-    // load
-    useEffect(()=>{
-      slug && Product.getData(`/posts/${id}`).then((data) => {
-        setProduct(data)
-      })
-    }, [slug])
+    const [product, setProduct] = useState<any>(data);
   return (
     <div>
-        Single {slug}
+        Single {product?.title}
         <h1>{product?.body}</h1>
     </div>
   )
+}
+
+// SSR
+export async function getServerSideProps(ctx: any) {
+  const Products_data = new Products()
+  const {id} = ctx.query;
+  const data = await Products_data.getData(`/posts/${id}`)
+  // console.log("__data:", data)
+  return { props: {data} }
 }
 
 export default SingleProduct

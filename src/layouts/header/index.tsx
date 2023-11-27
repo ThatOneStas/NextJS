@@ -17,6 +17,7 @@ const header = () => {
         <li style={{padding:10}}><Link href={'/products'}>Products</Link></li>
         <li style={{padding:10}}><Link href={'/redux'}>Redux</Link></li>
         <li style={{padding:10}}><Link href={'/wishlist'}>Wish List</Link></li>
+        <li style={{padding:10}}><Link href={'/cart'}>Cart</Link></li>
 
       </nav>
       <p>{CART_ITEMS.length > 0 ? CART_ITEMS.length : "корзина пуста"}</p>

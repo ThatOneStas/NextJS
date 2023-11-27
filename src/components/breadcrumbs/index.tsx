@@ -10,9 +10,9 @@ const Breadcrumbs = () => {
     // init
     const router = useRouter()
     // on load
-    const breadCrumbs = useMemo(()=>{
+    // const breadCrumbs = useMemo(()=>{
         
-    })
+    // })
     console.log(router)
   return (
     <>
