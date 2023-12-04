@@ -1,13 +1,42 @@
-import React from 'react'
+import {Component, ReactNode} from 'react'
 import Link from 'next/link'
-import Card from '@/components/card'
+import s from "@/pages/about/about.module.scss"
+import counter from '@/store/features/counter'
 
-const index = () => {
-  return <div>
-      <Link href="/">Головна</Link>
-      <Card title="Test Props" description='Lorem Ipsun'/>
-    </div>
+interface State {
+  counter: number
+}
+
+interface Props{
   
 }
 
-export default index
+class About extends Component<Props,State>{
+  constructor(props: Props){
+    super(props)
+    this.state={
+      counter:0
+    }
+  }
+  increment=()=>{
+    this.setState((prevState)=>({
+      counter: prevState.counter + 1
+    }))
+  }
+  decrement=()=>{
+    this.setState((prevState)=>({
+      counter: prevState.counter - 1
+    }))
+  }
+  render(): ReactNode{
+    return(
+      <>
+      <h1>About: {this.state.counter}</h1>
+      <button onClick={this.increment}>+</button>
+      <button onClick={this.decrement}>-</button>
+      </>
+    )
+  }
+}
+
+export default About;
